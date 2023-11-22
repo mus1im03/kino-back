@@ -19,10 +19,12 @@ const filmSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  genreId: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "Genre",
-  },
+  genreId: [
+    {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "Genre",
+    },
+  ],
 });
 
 const Film = mongoose.model("Film", filmSchema);
