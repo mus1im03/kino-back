@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema({
-  login: String,
+  email: String,
   password: String,
   favorites: [{type: mongoose.SchemaTypes.ObjectId,
   ref:"Film"

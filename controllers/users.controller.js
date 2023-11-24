@@ -40,14 +40,14 @@ module.exports.usersController = {
 
   postUser: async (req, res) => {
     try {
-      const { login, password } = req.body;
+      const { email, password } = req.body;
 
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDES)
       );
 
-      const user = await User.create({ login: login, password: hash });
+      const user = await User.create({ email: email, password: hash });
 
       await res.json(user);
     } catch (error) {
@@ -56,7 +56,7 @@ module.exports.usersController = {
   },
 
   login: async (req, res) => {
-    const { login, password } = req.body;
+    const { email, password } = req.body;
 
     const candidate = await User.findOne({ login });
 
@@ -72,9 +72,11 @@ module.exports.usersController = {
     }
 
     const payload = {
-      id: candidate._id,
-      login: candidate.login,
-    };
+
+        id: candidate._id,
+        email: candidate.email
+    }
+
 
     const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
       expiresIn: "24h",
