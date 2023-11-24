@@ -33,7 +33,7 @@ module.exports.usersController = {
   login: async (req, res) => {
     const { email, password } = req.body;
 
-    const candidate = await User.findOne({ login })
+    const candidate = await User.findOne({ email })
 
     if(!candidate) {
         return res.status(401).json('Неверный логин')

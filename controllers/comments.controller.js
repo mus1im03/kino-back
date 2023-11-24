@@ -10,9 +10,12 @@ module.exports.commentsController = {
   
   postComment: async (req, res) => {
     const { text } = req.body;
-
+    const {filmId} = req.params;
+    console.log(filmId, req.params);
     try {
-      const comment = await Comment.create({ text });
+      const comment = await Comment.create({ text, film: filmId });
+
+      
       await res.json(comment);
     } catch (e) {
       return res.status(401).json(e.toString());

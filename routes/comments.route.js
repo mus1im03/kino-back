@@ -4,7 +4,7 @@ const authMiddleware = require("../models/middlewares/auth.middleware");
 
 const router = Router();
 
-router.get('/comments', commentsController.getComments);
-router.post('/comments', authMiddleware, commentsController.postComment);
+router.get('/comments/:filmId', commentsController.getComments);
+router.post('/comments/:filmId', commentsController.postComment);
 
 module.exports = router;
